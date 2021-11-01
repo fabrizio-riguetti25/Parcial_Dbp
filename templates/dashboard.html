@@ -1,0 +1,21 @@
+{% extends 'app.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <h3>Hola, {{email}}</h3>
+    </div>
+    <div class="row mt-5">
+        <div class="col border-left">
+            <h3>Edita tu curriculum</h3>
+            <button class="btn btn-outline-success col-2" onclick="goTo('curriculum/edit')" type="button">Editar</button>
+          </div>
+          <div class="col border-left">
+            <h3>Mira tu curriculum</h3>
+            <button class="btn btn-outline-info col-2" onclick="goTo('curriculum/show')" type="button">Ver</button>
+          </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,337 @@
+{% extends 'app.html' %} {% block title %}Registro{% endblock %} {% block
+content %}
+
+<div class="container mt-2">
+  <div class="row justify-content-center">
+    <h2>Registrarse</h2>
+    <div class="ml-auto">
+      <a onclick="submit()" class="btn btn-success">Registrarse</a>
+    </div>
+  </div>
+  <hr />
+  <form action="/register" method="post" class="text-left" id="registerForm">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-4 border-right">
+        <h4>Datos Personales</h4>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="nombre"
+            id="inputName"
+            placeholder="Nombres y apellidos"
+            required
+          />
+          <div class="invalid-feedback">Ponga sus nombres y apellidos</div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="cargo"
+            id="inputCargo"
+            placeholder="Cargo"
+          />
+          <div class="invalid-feedback">Ponga su cargo</div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="estudio"
+            id="inputEstudio"
+            placeholder="Centro de Estudio"
+          />
+          <div class="invalid-feedback">Ponga su centro de estudios</div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="telefono"
+            id="inputTel"
+            placeholder="Teléfono"
+          />
+          <div class="invalid-feedback">Ponga su celular</div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="direccion"
+            id="inputDir"
+            placeholder="Dirección"
+          />
+          <div class="invalid-feedback">Ponga su dirección</div>
+        </div>
+        <hr />
+        <div class="form-group">
+          <label for="inputEmail">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            id="inputEmail"
+            required
+          />
+          <div class="invalid-feedback">Ponga un email</div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="inputPassword"
+            required
+          />
+          <div class="invalid-feedback">Ponga una contraseña</div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 border-right">
+        <h4>Experiencia laboral</h4>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="expStart">Fecha inicio</label>
+            <select id="expStart" class="form-control">
+              <option selected value="">Choose...</option>
+              {% for i in range(2021, 1997, -1)%}
+              <option value="{{i}}">{{i}}</option>
+              {%endfor%}
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="expEnd">Fecha Fin</label>
+            <select id="expEnd" class="form-control">
+              <option selected value="">Choose...</option>
+              {% for i in range(2021, 1997, -1)%}
+              <option value="{{i}}">{{i}}</option>
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expStart">Cargo</label>
+          <input type="text" class="form-control" id="expCargo" />
+        </div>
+        <div class="form-group">
+          <label for="expStart">Lugar</label>
+          <input type="text" class="form-control" id="expLugar" />
+        </div>
+        <div class="form-group">
+          <label for="expStart">Acciones</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="expAcciones"
+            placeholder="Separar cada acción por un  '|'"
+          ></textarea>
+        </div>
+        <a onclick="añadirExp()" class="btn btn-primary">Añadir</a>
+        <ul id="listExp" class="mt-4"></ul>
+      </div>
+      <div class="col-12 col-lg-4 border-right">
+        <h4>Educación</h4>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="edStart">Fecha inicio</label>
+            <select id="edStart" class="form-control">
+              <option selected value="">Choose...</option>
+              {% for i in range(2021, 1997, -1)%}
+              <option value="{{i}}">{{i}}</option>
+              {%endfor%}
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="edEnd">Fecha Fin</label>
+            <select id="edEnd" class="form-control">
+              <option selected value="">Choose...</option>
+              {% for i in range(2021, 1997, -1)%}
+              <option value="{{i}}">{{i}}</option>
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expStart">Descripción | Institución</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="edDesc"
+            placeholder="Ej: Licenciado en Ciencia de la computación | Universidad Católica San Pablo"
+          ></textarea>
+        </div>
+        <a onclick="añadirEd()" class="btn btn-primary">Añadir</a>
+        <ul id="listEd" class="mt-4"></ul>
+        <hr />
+
+
+        <h4>Competencias</h4>
+        <div class="form-group">
+          <label for="competencia">Descripción</label>
+          <textarea
+            type="text"
+            class="form-control"
+            id="compDesc"
+            placeholder="Ej: Conocimiento para mejorar la usabilidad de sitios web"
+          ></textarea>
+        </div>
+        <a onclick="addComps()" class="btn btn-primary">Añadir</a>
+        <ul id="listComps" class="mt-4"></ul>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Flexbox container for aligning the toasts -->
+<div
+  aria-live="polite"
+  aria-atomic="true"
+  class="d-flex justify-content-center align-items-center"
+  style="height: 200px"
+>
+  <!-- Then put toasts within -->
+  <div
+    id="alert"
+    class="toast hide bg-info"
+    data-delay="3000"
+    role="alert"
+    aria-live="assertive"
+    style="position: absolute; top: 70"
+    aria-atomic="true"
+  >
+    <div class="toast-header">
+      <strong class="mr-auto">Curriculums</strong>
+      <button
+        type="button"
+        class="ml-2 mb-1 close"
+        data-dismiss="toast"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body text-white" id="alert-message"></div>
+  </div>
+</div>
+
+<script>
+  var expLaboral = [];
+  var formacion = [];
+  var competencias= [];
+  async function añadirExp() {
+    let expStart = $("#expStart").val();
+    let expEnd = $("#expEnd").val();
+    let cargo = $("#expCargo").val();
+    let lugar = $("#expLugar").val();
+    let acciones = $("#expAcciones").val();
+    if (expEnd < expStart) {
+      let msg = "Fecha de Fin debe ser mayor a la fecha de inicio";
+      await $("#alert-message").text(msg);
+
+      $("#alert").toast("show");
+      return;
+    }
+    if (expStart && expEnd && cargo && lugar && acciones) {
+      let msg = "Experiencia laboral añadida.";
+      await $("#alert-message").text(msg);
+      let listExp = $("#listExp");
+      listExp.append(`
+        <li>
+          ${expStart} - ${expEnd}: ${lugar}  
+        </li>
+      `);
+      expLaboral.push({ expStart, expEnd, cargo, lugar, acciones });
+      $("#expStart").val("");
+      $("#expEnd").val("");
+      $("#expCargo").val("");
+      $("#expLugar").val("");
+      $("#expAcciones").val("");
+      console.log({ expStart, expEnd, cargo, lugar, acciones });
+    } else {
+      let msg =
+        "Debe completar los campos para añadir una experiencia laboral.";
+      await $("#alert-message").text(msg);
+    }
+    $("#alert").toast("show");
+  }
+
+  async function añadirEd() {
+    let edStart = $("#edStart").val();
+    let edEnd = $("#edEnd").val();
+    let descripcion = $("#edDesc").val();
+    if (edEnd < edStart) {
+      let msg = "Fecha de Fin debe ser mayor a la fecha de inicio";
+      await $("#alert-message").text(msg);
+
+      $("#alert").toast("show");
+      return;
+    }
+    if (edStart && edEnd && descripcion) {
+      let msg = "Formación añadida.";
+      await $("#alert-message").text(msg);
+      let listExp = $("#listEd");
+      listExp.append(`
+        <li>
+          ${edStart} - ${edEnd}: ${descripcion}  
+        </li>
+      `);
+      formacion.push({ edStart, edEnd, descripcion});
+      $("#edStart").val("");
+      $("#edEnd").val("");
+      $("#edDesc").val("");
+      console.log({ edStart, edEnd, descripcion});
+    } else {
+      let msg =
+        "Debe completar los campos para añadir un item de educación.";
+      await $("#alert-message").text(msg);
+    }
+    $("#alert").toast("show");
+  }
+
+  async function addComps(){
+    let desc = $('#compDesc').val()
+
+    if (desc){
+      let msg = "Competencia añadida.";
+      await $("#alert-message").text(msg);
+      let listExp = $("#listComps");
+      listExp.append(`
+        <li>
+          ${desc}  
+        </li>
+      `);
+      competencias.push({ descripcion: desc});
+      $("#compDesc").val("");
+      
+      console.log({ desc});
+    }else {
+      let msg =
+        "Debe completar los campos para añadir una competencia";
+      await $("#alert-message").text(msg);
+    }
+    $("#alert").toast("show");
+  }
+
+  async function submit(){
+    if ($('#registerForm')[0].checkValidity()){
+      await $('#registerForm').append(`<input type="hidden" name="experiencia" value="">`);
+      await $('#registerForm').append(`<input type="hidden" name="formacion" value="">`);
+      await $('#registerForm').append(`<input type="hidden" name="competencias" value="">`);
+      await $("[name='experiencia']").val(JSON.stringify(expLaboral))
+      await $("[name='formacion']").val(JSON.stringify(formacion))
+      await $("[name='competencias']").val(JSON.stringify(competencias))
+      $('#registerForm').submit();
+    }
+    else{
+      $('#registerForm')[0].reportValidity();
+      let msg =
+        "Debe completar los campos personales para registrarse";
+      await $("#alert-message").text(msg);
+    }
+    // $('#registerForm').submit();
+  }
+
+</script>
+
+{% endblock %}

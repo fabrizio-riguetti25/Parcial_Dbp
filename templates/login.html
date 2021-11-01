@@ -1,0 +1,71 @@
+{% extends 'app.html' %} {% block title %}Login{% endblock %} {% block content
+%}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-4 text-center">
+      <h2>Iniciar Sesión</h2>
+      <hr />
+      <form action="/login" method="post" class="text-left">
+        <div class="form-group">
+          <label for="inputEmail">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            id="inputEmail"
+            required
+          />
+          <div class="invalid-feedback">Ponga un email</div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            name="pswr"
+            id="inputPassword"
+            required
+          />
+          <div class="invalid-feedback">Ponga una contraseña</div>
+        </div>
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <div class="alert alert-danger" role="alert">
+          <ul class="flashes">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %} {% endwith %}
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="contenedor__todo">
+
+  <div class="contenedor__login-register">
+    <form action="/login" method="post" class="formulario__login">
+        <h2>Iniciar Sesión</h2>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Correo Electronico"
+        />
+        <input type="password" id="pswr" name="pswr" placeholder="Contraseña" />
+        <input
+          type="submit"
+          id="send-signup"
+          name="signup"
+          value="Entrar"
+        />
+    </form>
+  </div>
+</div> -->
+
+{% endblock %}

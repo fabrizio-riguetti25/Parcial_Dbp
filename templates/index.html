@@ -1,0 +1,36 @@
+{% extends 'app.html' %}
+{% block title %}Index{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col border-left">
+      <h3>¿Ya tienes una cuenta?</h3>
+      <p>Inicia sesión para entrar en la página</p>
+      <button class="btn btn-outline-success" onclick="goTo('login')" type="button">Iniciar sesión</button>
+    </div>
+    <div class="col border-left">
+      <h3>¿Aún no tienes una cuenta?</h3>
+      <p>Regístrate para que puedas iniciar sesión</p>
+      <button class="btn btn-outline-info" onclick="goTo('register')" type="button">Registrarse</button>
+
+    </div>
+    
+  </div>
+</div>
+
+<!-- <div class="contenedor__todo">
+  <div class="caja__trasera">
+    <div class="caja__trasera-login">
+      <h3>¿Ya tienes una cuenta?</h3>
+      <p>Inicia sesión para entrar en la página</p>
+      <button id="btn__iniciar-sesion" onclick="goTo('login')">Iniciar Sesión</button>
+    </div>
+    <div class="caja__trasera-register">
+      <h3>¿Aún no tienes una cuenta?</h3>
+      <p>Regístrate para que puedas iniciar sesión</p>
+      <button id="btn__registrarse" onclick="goTo('register')">Regístrarse</button>
+    </div>
+  </div>
+</div> -->
+{% endblock %}

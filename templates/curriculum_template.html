@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+	<title> Currículo</title>
+	<link rel="shortcut icon" type="image/x-icon" href="curriculum.ico">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<style>
+      .row> div {
+          padding: 20px;
+          background-color: white;
+          border: 2px solid black;
+      }
+    </style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-4" align="left">
+				<style>
+					body {
+        				background-color: #000000;
+    				}
+    				div {
+        				
+        				background-color: #700000;
+    				}
+    			</style>
+
+				<center><img src="/static/fabrizio.jpeg" alt="Foto" style="width:250px"></<center>
+				
+
+				<hr/>
+				
+				
+				<p>
+					<h4> SOBRE MI </h4>
+					<fieldset align="left">
+						<p>
+							Mi nombre es {{user['nombre']}}. 
+							<br> Soy {{user['cargo']}}. 
+							<br>Estudié en la {{user['centro_estudio']}}.
+						</p>
+					</fieldset>
+				</p>
+				<p>
+				<hr>
+					<h4>CONTACTO</h4>
+					<fieldset align="left">
+					
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/wttp.jpeg" alt="logo whatsapp" style="width:25px" align=middle> {{user['telefono']}}
+						<br>
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/gmail.jpeg" alt="logo mail" style="width:25px" align=middle> {{user['email']}}
+						<br>
+
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/instagram.jpeg" alt="logo instagram" style="width:25px" align=middle> @Riguetti25
+						<br> -->
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/ubicacion.jpeg" alt="logo instagram" style="width:25px" align=middle> {{user['direccion']}} <br>
+						<!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;José Luis Bustamante y Rivero	
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arequipa, Perú. -->
+
+					</fieldset>
+					<br>
+				
+				</p>
+				
+				<hr/>
+
+				<p>
+				
+					<h4>IDIOMAS</h4>
+					<fieldset align="left">
+						
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Español &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" id="a" name="aa" value="a">
+																				<input type="checkbox" id="b" name="aa" value="b"> 
+																				<input type="checkbox" id="c" name="aa" value="c" checked onclick="return false;">
+																				<input type="checkbox" id="d" name="aa" value="d" checked onclick="return false;">
+																				<input type="checkbox" id="e" name="aa" value="e" checked onclick="return false;">
+																				<input type="checkbox" id="f" name="aa" value="f" checked onclick="return false;">
+ 																		    
+						<br>
+						
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inglés &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="g" name="gg" value="g">
+																				<input type="checkbox" id="h" name="gg" value="h"> 
+																				<input type="checkbox" id="i" name="gg" value="i" >
+																				<input type="checkbox" id="j" name="gg" value="j">
+																				<input type="checkbox" id="k" name="gg" value="k">
+																				<input type="checkbox" id="l" name="gg" value="l" checked>
+						
+						<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Portugués &nbsp;<input type="checkbox" id="m" name="mm" value="m">
+																				<input type="checkbox" id="n" name="mm" value="n"> 
+																				<input type="checkbox" id="o name="mm" value="o" >
+																				<input type="checkbox" id="p" name="mm" value="p">
+																				<input type="checkbox" id="q" name="mm" value="q">
+																				<input type="checkbox" id="r" name="mm" value="r" checked>
+					</fieldset>
+					<br>
+			
+				</p>
+				
+
+
+			</div>
+			<div class="col-8">
+				<div class="col-12 p-2">
+					
+					<h3><center><p style="color:white";>{{user['nombre']}}</p></center></h3>
+					<h4><center><p style="color:white";>{{user['cargo']}}</p></center></h4>
+
+				</div>	
+				<hr/>
+				{%if user['experiencia'] | length != 0 %}
+				<h3><i>EXPERIENCIA LABORAL</i> </h3>
+				<br>
+				{%for exp in user['experiencia']%}
+				
+				{{exp['expStart']}} - {{exp['expEnd']}} <br>
+				<b>{{exp['cargo']}}</b>
+				<fieldset>
+					{%for accion in exp['acciones'].split('|')%}
+					<li>{{accion}}</li>
+					{%endfor%}
+				</fieldset>
+				{{exp['lugar']}}
+				<br><br>
+				{%endfor%}
+				{%endif%}
+				{%if user['educacion'] | length != 0 %}
+				<hr>
+				<h3><i>FORMACIÓN</i> </h3>
+				<br>
+				<p>
+					<fieldset>
+						{%for edu in user['educacion']%}
+						{{edu['edStart']}} - {{edu['edEnd']}} <br>
+						{{edu['descripcion']}}
+						<br><br>
+						{%endfor%}
+					</fieldset>
+				</p>
+				{%endif%}
+
+				{%if user['competencias'] | length != 0 %}
+				<hr/>
+				<h3><i>COMPETENCIAS </i> </h3>
+				<br>
+				<fieldset>
+					{%for comp in user['competencias']%}
+					<li>{{comp['descripcion']}}</li>
+					{%endfor%}
+				</fieldset>
+				{%endif%}
+			</div>
+				
+		</div>
+	</div>
+
+</HTML>
